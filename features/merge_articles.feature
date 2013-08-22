@@ -6,14 +6,26 @@ Feature: Merge Articles
   Background:
     Given the blog is set up
 
-  Scenario: Successfullly merge two articles
+  Scenario: When articles are merged, the merged article should contain the text of both previous articles
     Given I am logged into the admin panel
-    And I am on the edit article page
+    And I am on the edit article page for id "1"
     Then I should see the "merge_with" text field
     When I fill in "merge_with" with "2"
     And I press "Merge"
-    Then I should be on the admin content page
-    When I go to the home page
-    Then I should see "Foobar"
-    When I follow "Foobar"
-    Then I should see "Lorem Ipsum"
+    Then I should be on the edit article page for id "1"
+    And I should see "Successfully merged article"
+    And the article text should contain the text of both articles
+
+  Scenario: Merge option not avaible to non-admin roles
+    Given I am logged into the admin panel not as an admin
+    And I am on the edit article page
+    Then I should not see the "merge_with" text field
+  
+  Scenario: A non-admin cannot merge two articles
+    Given I am not an admin
+    And I am logged into the admin panel
+    And I make a post request to the merge article URL for id "1"
+    Then I should be on the edit article page for id "1"
+    And I should see "Article merging not permitted for non-admin users"
+    
+    
