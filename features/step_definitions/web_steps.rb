@@ -140,6 +140,14 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Then /^(?:|I )should see #(.*)$/ do |text|
+  if page.respond_to? :should
+    page.should have_selector("\##{text}")
+  else
+    assert page.has_content?("\##{text}")
+  end
+end
+
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
 
@@ -212,6 +220,9 @@ Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_me
       error_paragraph.should have_content(error_message)
     else
       page.should have_content("#{field.titlecase} #{error_message}")
+    assign(:images, [])
+    assign(:macros, [])
+    assign(:resources, [])
     end
   else
     if using_formtastic

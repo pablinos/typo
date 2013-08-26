@@ -1,10 +1,11 @@
-<!-- %= form_tag({ :action => "merge"} , :id => "merge_form") do %-->
+<%= form_tag({ :action => "merge"} , :id => "merge_form") do %>
 
   <div class='separator'>
     <h4><%= _("Merge Articles") %></h4>
     <div class=''>
-      <%= text_field 'merge', 'merge_with', { :style => 'width: 100%'} %>
+      <%= text_field 'merge', 'with', { :style => 'width: 25%'} %>
     </div>
+    <input id='merge_button' type="submit" value="<%= _('Merge') %>" name="merge[merge]" class='btn info' />
   </div>
 
-<!--% end %-->
+<% end %>

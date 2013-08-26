@@ -9,7 +9,7 @@ Feature: Merge Articles
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
     Given I am logged into the admin panel
     And I am on the edit article page for id "1"
-    Then I should see the "merge_with" text field
+    Then I should see #merge_with
     When I fill in "merge_with" with "2"
     And I press "Merge"
     Then I should be on the edit article page for id "1"

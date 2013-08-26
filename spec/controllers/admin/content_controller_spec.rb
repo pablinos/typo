@@ -607,6 +607,12 @@ describe Admin::ContentController do
       end
     end
 
+    describe 'merge action' do
+      it 'should call the model method to merge articles'
+      it 'should assign the merged article'
+      it 'should render the edit view'
+      it 'should 
+    end
   end
 
   describe 'with publisher connection' do
